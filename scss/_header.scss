@@ -1,0 +1,38 @@
+.header{
+    .primero{
+        .enviosPais{
+        display: flex;
+        justify-content: center}
+    }
+    .searchPadre{
+        display: flex;
+        justify-content: space-around;
+        background-color: green;
+        height: 100px;
+        .logo{
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 8%;
+            img{
+            width: 60%;
+            }
+        }
+        .search{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .barraSearch{
+                width: 500px;
+            }
+        }
+        .usuario{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .register{
+                padding: 0px 8px;
+            }
+        }
+    }
+}

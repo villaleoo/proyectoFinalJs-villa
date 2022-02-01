@@ -1,0 +1,73 @@
+.content{
+    .carousel{
+        margin: 0;
+        padding: 0;
+    }
+    .margenes{
+        padding:20px 150px;
+        .contenedorOfertas{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 80px;
+            .ofertas{
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin: 0px 20px;
+                background-color: black;
+            }
+        }
+        .bannersGeneros{
+            display: flex;
+            justify-content: center;
+            .banner0{
+                margin:0 15px;
+            }
+        }
+        .bannersOferta{
+            display: flex;
+            justify-content: center;
+            .banner1{
+                margin:0px 15px;
+            }
+        }
+        .masVendidos{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin:20px 0px;
+            .vendidos{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin: 10px 20px;
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        .suscripcionPadre{
+            display: flex;
+            justify-content: center;
+            border-radius: 10px;
+            border: solid grey;
+            margin: 10px 200px 80px 200px;
+            .suscripcion{
+                padding: 30px 0px;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                .dataSuscripcion{
+                    width: 550px;
+                    height: 40px;
+                }
+                .inputSuscripcion{
+                    height: 40px;
+                    background-color: hotpink;
+                }
+            }
+        }
+    }
+}
