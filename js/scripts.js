@@ -144,7 +144,7 @@ do{
     productoIngresado=prompt("Ingrese el producto que desea adquirir.").toLowerCase();
     
     if(productosValidos.includes(productoIngresado.trim().toLowerCase())){
-        marcaIngresada=prompt("Si lo desea, ingrese una marca en particular (ADIDAS, NIKE, VANS ó PUMA").toLowerCase();
+        marcaIngresada=prompt("Si lo desea, ingrese una marca en particular (ADIDAS, NIKE, VANS ó PUMA)").toLowerCase();
         productosFiltrados = productos.filter(p => {
             if(marcasValidas.includes(marcaIngresada.trim())) {
                 return p.marca === marcaIngresada && p.tipo === productoIngresado;
@@ -179,6 +179,6 @@ do{
     }else if (productoIngresado==="ninguno"){
         alert("Gracias por visitarnos.");
     }else{
-        alert("Por favor ingrese un producto válido: GORRA, BUZO, CAMPERA, REMERA, PANTALON, ZAPATILLA, MALLA. SIN la letra `s` al final.");
+        alert("Por favor ingrese un producto válido: GORRA, BUZO, CAMPERA, REMERA, PANTALON, ZAPATILLA, MALLA (SIN la letra `s` al final) o NINGUNO para finalizar.");
     }
 }while((productoIngresado!="ninguno")&& (continuacion!="no"));
