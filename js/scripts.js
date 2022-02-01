@@ -8,7 +8,7 @@ function obtenerProducto(id, tipo, marca, nombre, genero, talles, precio) {
         talles,
         precio,
     }
-}
+};
 
 const producto0= obtenerProducto(1,"zapatilla","adidas","Racer TR21","unisex","41,42,43",13400);
 const producto1= obtenerProducto(2,"zapatilla","adidas","Marimekko NMD_R1","unisex", "41,42,43", 24000);
@@ -115,34 +115,30 @@ const productos=[
     producto49 ,
     producto50 ,
 ];
-const productosValidos = ["gorra", "campera", "buzo", "remera","pantalon", "malla", "zapatilla", "sandalias"];
-const marcasValidas =["adidas", "nike", "vans", "puma"];
-
 let productoIngresado = "";
 let marcaIngresada = "";
-let artDeCompra = 0;
 let continuacion="";
 let total="";
+let artDeCompra = 0;
 let carritoDeCompras=[];
 let productosFiltrados= [];
-let productosFiltradosIds = [];
-
+let productosDelCarritoIds = [];
+const productosValidos = ["gorra", "campera", "buzo", "remera","pantalon", "malla", "zapatilla"];
+const marcasValidas =["adidas", "nike", "vans", "puma"];
 
 function filtros(){
     productosFiltrados.forEach(a =>{
-        alert(`ID: ${a.id}\nNombre: ${a.nombre}\nPrecio: ${a.precio}`);
+        alert(`ID: ${a.id}\nNombre: ${a.nombre}\nPrecio: ${a.precio}\n///*Recuerde el ID para agregarlo a su compra.*///`)
     })
-}
+};
 function detalleCarrito(){
     carritoDeCompras.forEach((s)=>{
-        alert(`Producto: ${s.tipo}. Nombre: ${s.nombre} -> $${s.precio} (en su Carrito).`);
+        alert(`//////EN SU CARRITO//////\nProducto: ${s.tipo}.\nNombre: ${s.nombre}\n$${s.precio}.`);
     });
-    total=carritoDeCompras.reduce((acc,el)=> acc + el.precio, 0);                                         /*pensarlo para restar del changuito (signo -) */
+    total=carritoDeCompras.reduce((acc,el)=> acc + el.precio, 0);                                         
     alert(`El total de su compra es de $${total}.`);
     alert(`Se emitirá un comprobante por el total mencionado ($${total}).\nGracias por su compra!`);
-}
-
-
+};
 
 do{
     productoIngresado=prompt("Ingrese el producto que desea adquirir.").toLowerCase();
@@ -173,12 +169,12 @@ do{
             if ((continuacion==="no")&&(carritoDeCompras.length===0)){                           
                 alert ("Gracias por su consulta.");    
             }else if((continuacion==="no")&&(carritoDeCompras!=0)){
-                detalleCarrito();                                            /*aca deberia ir desea restarle algo al chango */
+                detalleCarrito();                                           
             }
         }else if((continuacion==="no")&&(carritoDeCompras.length===0)){
-            alert ("Gracias por su consulta.")
+            alert ("Gracias por su consulta.");
         }else if ((continuacion==="no")&&(carritoDeCompras.length!=0)){
-            detalleCarrito();                                                       /*aca deberia ir desea restarle algo al chango */
+            detalleCarrito();                                                       
         }    
     }else if (productoIngresado==="ninguno"){
         alert("Gracias por visitarnos.");

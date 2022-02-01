@@ -71,3 +71,24 @@ const productosFiltrados = [
 
 
   productosFiltradosIds.include(artDeCompra)
+
+
+/////proximas funciones
+let continuarQuitando="";
+
+
+alert("A continuacion verá la lista de su compra.Con el valor ID de cada producto podrá QUITAR dicho articulo de su compra.");
+function quitandoCarritoCompras(){
+  reducirCarritoDeCompras=prompt(`Si desea retirar un articulo, igrese el ID del producto a quitar.Para continuar, solo desista de este mensaje.`);
+  productosDelCarritoIds= carritoDeCompras.map (c => c.id);
+  if(productosDelCarritoIds.indexOf(reducirCarritoDeCompras)>=0){
+      productosDelCarritoIds.splice(productosDelCarritoIds.indexOf(reducirCarritoDeCompras),1);
+      const productoQuitado= carritoDeCompras.find((f)=>f.id == reducirCarritoDeCompras);
+      alert(`${productoQuitado.nombre} removido con éxito.`);
+      do{
+      continuarQuitando=prompt("Desea quitar algo mas? si/no");
+      }while((continuarQuitando!="si")||(continuarQuitando!="no"))
+      
+  }
+}
+
