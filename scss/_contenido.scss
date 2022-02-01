@@ -1,4 +1,12 @@
 .content{
+    .enviosCuotas{
+        display: flex;
+        justify-content: center;
+        .enviosCuotasParrafo{
+            font-size: x-large;
+            font-weight: bolder;
+        }
+    }
     .carousel{
         margin: 0;
         padding: 0;

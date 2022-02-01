@@ -5,6 +5,9 @@ body {
 .header .primero .enviosPais {
   display: flex;
   justify-content: center; }
+  .header .primero .enviosPais .envios {
+    font-size: x-large;
+    font-weight: bolder; }
 
 .header .searchPadre {
   display: flex;
@@ -30,6 +33,13 @@ body {
     align-items: center; }
     .header .searchPadre .usuario .register {
       padding: 0px 8px; }
+
+.content .enviosCuotas {
+  display: flex;
+  justify-content: center; }
+  .content .enviosCuotas .enviosCuotasParrafo {
+    font-size: x-large;
+    font-weight: bolder; }
 
 .content .carousel {
   margin: 0;

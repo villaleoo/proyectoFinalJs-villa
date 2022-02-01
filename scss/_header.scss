@@ -1,8 +1,13 @@
 .header{
     .primero{
         .enviosPais{
-        display: flex;
-        justify-content: center}
+            display: flex;
+            justify-content: center;
+            .envios{
+                font-size: x-large;
+                font-weight: bolder;
+            }
+        }
     }
     .searchPadre{
         display: flex;
@@ -15,7 +20,7 @@
             height: 100%;
             width: 8%;
             img{
-            width: 60%;
+                width: 60%;
             }
         }
         .search{
