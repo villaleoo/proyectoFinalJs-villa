@@ -92,3 +92,58 @@ function quitandoCarritoCompras(){
   }
 }
 
+
+
+
+
+
+let checksBoxs = document.querySelectorAll(".aplicarFiltro");
+let bontonesFiltro = document.getElementById ("botonFilterTipo");
+
+
+
+bontonesFiltro.addEventListener("click", function(){
+    checksBoxs.forEach(()=>{
+        if(document.getElementById("zapatillas").checked){
+            mostrarProductos(productos.filter(el=> el.tipo=="zapatilla"));
+        }
+        else if(document.getElementById("remeras").checked){
+            mostrarProductos(productos.filter(el=> el.tipo=="remera"));
+        }
+        else if (document.getElementById("pantalones").checked){
+            mostrarProductos(productos.filter(el=>el.tipo=="pantalon"));
+        }
+        else if (document.getElementById("buzos").checked){
+            mostrarProductos(productos.filter(el=>el.tipo== "buzo"));
+        }
+        else if (document.getElementById("camperas").checked){
+            mostrarProductos(productos.filter(el=>el.tipo=="campera"));
+        }
+        else if (document.getElementById("mallas").checked){
+            mostrarProductos(productos.filter(el=>el.tipo=="malla"));
+        }
+        else if(document.getElementById("gorras").checked){
+            mostrarProductos(productos.filter(el=>el.tipo=="gorra"));
+        }
+        else{
+            mostrarProductos(productos)
+        }
+    })
+  })
+
+
+
+
+  let botonFiltroMarca= document.getElementById ("botonFilterMarca");
+
+botonFiltroMarca.addEventListener("click", function(){
+    if (document.getElementById("adidas").checked){
+        mostrarProductos(productos.filter(el=>el.marca=="adidas"));
+    }else if (document.getElementById("nike").checked){
+        mostrarProductos(productos.filter(el=>el.marca == "nike"));
+    }else if (document.getElementById("vans").checked){
+        mostrarProductos(productos.filter(el=>el.marca == "vans"));
+    }else if (document.getElementById("puma").checked){
+        mostrarProductos(productos.filter(el=>el.marca == "puma"));
+    }
+})
