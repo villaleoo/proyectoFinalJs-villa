@@ -134,16 +134,21 @@ bontonesFiltro.addEventListener("click", function(){
 
 
 
-  let botonFiltroMarca= document.getElementById ("botonFilterMarca");
+  for (const filter of filtrosTipo){
+    filter.addEventListener("click",()=>{                                               //recorre todos los inputs asignados a los filtros POR TIPO DE PRODUCTO. si
+        let categoria = productos.filter(item=>item.tipo == filter.id)                  // "clikearon" en un input,analiza que el id del boton (el nombre de id
+        mostrarProductos(categoria)                                                     // de los inputs los toma de los tipo de productos que hay), 
+    })                                                                                  //coincida con el tipo de producto filtrado(.filter). Si coincide, muestra 
+};                                                                                      // el tipo de producto por el cual coincidieron.
 
-botonFiltroMarca.addEventListener("click", function(){
-    if (document.getElementById("adidas").checked){
-        mostrarProductos(productos.filter(el=>el.marca=="adidas"));
-    }else if (document.getElementById("nike").checked){
-        mostrarProductos(productos.filter(el=>el.marca == "nike"));
-    }else if (document.getElementById("vans").checked){
-        mostrarProductos(productos.filter(el=>el.marca == "vans"));
-    }else if (document.getElementById("puma").checked){
-        mostrarProductos(productos.filter(el=>el.marca == "puma"));
-    }
-})
+
+
+if(filtrosArray=productos.filter(item=>item.marca == filter.id)){
+    console.log("panchitooo")
+    mostrarProductos(filtrosArray);
+}
+if (filtrosArray=productos.filter(item=>item.genero == filter.id)){
+    mostrarProductos(filtrosArray);
+}
+if(filtrosArray=productos.filter(item=>item.talles == filter.id)){
+    mostrarProductos(filtrosArray);

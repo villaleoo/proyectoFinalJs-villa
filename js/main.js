@@ -119,20 +119,30 @@ const productos=[
 
 const productosValidos = ["gorra", "campera", "buzo", "remera","pantalon", "malla", "zapatilla"];
 const marcasValidas =["adidas", "nike", "vans", "puma"];
-let carritoDeCompras=[]
+const generosValidos=["hombre", "mujer"];
+const tallesValidosLetras=["s","m","l","xl"];
+const tallesValidosNumeros=[38,39,40,41,42,43];
+let carritoDeCompras=[];
 let containerProductos= document.getElementById ("productosPadre");
 let botonAgr= document.getElementsByClassName ("addCarrito");
-let containerFiltros= document.getElementById ("contenedorFiltrosPorProducto");
-let filtrosTipo= document.getElementsByClassName("inputsCateg");
-let btnAllCateg= document.getElementById("categButton");
+let allsFiltros= document.getElementsByClassName("inputsFiltros");
+let tipoDeProductoFilter= document.getElementById("filtroTipoProducto");
+let marcaFilter= document.getElementById("filtroMarca");
+let generoFilter= document.getElementById("filtroGenero");
+let arrayFiltrado=[]
+let filtrosArray=[]
+
 
 document.addEventListener("DOMContentLoaded", mostrarProductos(productos));
 
-crearFiltros(productosValidos)
+crearFiltros(productosValidos, tipoDeProductoFilter);
+crearFiltros(marcasValidas, marcaFilter);
+crearFiltros(generosValidos, generoFilter);
 
-function mostrarProductos(productos){
+
+function mostrarProductos(array){
     containerProductos.innerHTML="";
-    productos.forEach(producto =>{
+    array.forEach(producto =>{
         let divProductos = document.createElement ("div");
         divProductos.className ="contenedorProductos";                      //crea un div con un h3,h4 y un boton de agregar al carro por cada producto.
         divProductos.innerHTML += `<div class="img-productos">              
@@ -148,25 +158,40 @@ function mostrarProductos(productos){
     })
 };
 
-function crearFiltros(array){
-    array.forEach(p=>{
-        let divCategorias= document.createElement ("div");
-        divCategorias.className= "contenedorCategorias";                   //recorre el array de marcasvalidas o productosvalidos(segun el filtro) y crea botones para filtrar(label e input)
-        divCategorias.innerHTML +=`<label class="descripFiltro">${p}</label>                
-        <input type="radio" class="inputsCateg" name="categoria" id=${p} </input>`;
-        containerFiltros.appendChild(divCategorias);
+
+
+
+for (const filter of allsFiltros){
+    filter.addEventListener("click",()=>{
+        productos.filter(p=>{
+            if(filter.id.includes(p.tipo)){
+                arrayFiltrado=p
+                console.log(arrayFiltrado)              //aqui no puedo usar la funcion mostrarProductos()
+            }
+            if(filter.id == p.marca){
+                console.log(p)
+            }
+            if((filter.id == p.genero)&&(p.genero=="unisex")){
+                console.log(p)
+            }
+        })
     })
-    btnAllCateg.addEventListener("click",()=>{      //boton de "mostrar TODO"
-        mostrarProductos(productos)
+}
+
+
+
+
+
+function crearFiltros(array, contenedorEnHtml){
+    array.forEach(p=>{
+        let divFiltros= document.createElement ("div");
+        divFiltros.className= "contenedorFiltros";                   //recorre el array de marcasvalidas o productosvalidos(segun el filtro) y crea botones para filtrar(label e input)
+        divFiltros.innerHTML +=`<label class="descripFiltro">${p}</label>                
+        <input type="radio" class="inputsFiltros" name="filters" id=${p} </input>`;
+        contenedorEnHtml.appendChild(divFiltros);
     })
 };
 
-for (const filter of filtrosTipo){
-    filter.addEventListener("click",()=>{                                               //recorre todos los inputs asignados a los filtros POR TIPO DE PRODUCTO. si
-        let categoria = productos.filter(item=>item.tipo == filter.id)                  // "clikearon" en un input,analiza que el id del boton (el nombre de id
-        mostrarProductos(categoria)                                                     // de los inputs los toma de los tipo de productos que hay), 
-    })                                                                                  //coincida con el tipo de producto filtrado(.filter). Si coincide, muestra 
-};                                                                                       // el tipo de producto por el cual coincidieron.
 
 for(const boton of botonAgr){
     boton.addEventListener("click",()=>{
