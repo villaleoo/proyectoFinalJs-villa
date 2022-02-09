@@ -121,7 +121,7 @@ const productosValidos = ["gorra", "campera", "buzo", "remera","pantalon", "mall
 const marcasValidas =["adidas", "nike", "vans", "puma"];
 let carritoDeCompras=[]
 let containerProductos= document.getElementById ("productosPadre");
-let botonAgr =document.getElementsByClassName ("addCarrito");
+let botonAgr= document.getElementsByClassName ("addCarrito");
 let containerFiltros= document.getElementById ("contenedorFiltrosPorProducto");
 let filtrosTipo= document.getElementsByClassName("inputsCateg");
 let btnAllCateg= document.getElementById("categButton");
@@ -134,8 +134,8 @@ function mostrarProductos(productos){
     containerProductos.innerHTML="";
     productos.forEach(producto =>{
         let divProductos = document.createElement ("div");
-        divProductos.className ="contenedorProductos";
-        divProductos.innerHTML += `<div class="img-productos">
+        divProductos.className ="contenedorProductos";                      //crea un div con un h3,h4 y un boton de agregar al carro por cada producto.
+        divProductos.innerHTML += `<div class="img-productos">              
         <img src="${producto.img}">
         </div> 
         <div class="info-productos">
@@ -151,27 +151,27 @@ function mostrarProductos(productos){
 function crearFiltros(array){
     array.forEach(p=>{
         let divCategorias= document.createElement ("div");
-        divCategorias.className= "contenedorCategorias";
-        divCategorias.innerHTML +=`<label class="descripFiltro">${p}</label>
+        divCategorias.className= "contenedorCategorias";                   //recorre el array de marcasvalidas o productosvalidos(segun el filtro) y crea botones para filtrar(label e input)
+        divCategorias.innerHTML +=`<label class="descripFiltro">${p}</label>                
         <input type="radio" class="inputsCateg" name="categoria" id=${p} </input>`;
         containerFiltros.appendChild(divCategorias);
     })
-    btnAllCateg.addEventListener("click",()=>{
+    btnAllCateg.addEventListener("click",()=>{      //boton de "mostrar TODO"
         mostrarProductos(productos)
     })
 };
 
 for (const filter of filtrosTipo){
-    filter.addEventListener("click",()=>{
-        let categoria = productos.filter(item=>item.tipo == filter.id)
-        mostrarProductos(categoria)
-    })
-};
+    filter.addEventListener("click",()=>{                                               //recorre todos los inputs asignados a los filtros POR TIPO DE PRODUCTO. si
+        let categoria = productos.filter(item=>item.tipo == filter.id)                  // "clikearon" en un input,analiza que el id del boton (el nombre de id
+        mostrarProductos(categoria)                                                     // de los inputs los toma de los tipo de productos que hay), 
+    })                                                                                  //coincida con el tipo de producto filtrado(.filter). Si coincide, muestra 
+};                                                                                       // el tipo de producto por el cual coincidieron.
 
 for(const boton of botonAgr){
     boton.addEventListener("click",()=>{
-        let producto = productos.find(articulo=>articulo.id== boton.id);
-        carritoDeCompras.push(producto);
+        let producto = productos.find(articulo=>articulo.id== boton.id);        //funcion del carrito, recorre todos los botones de "agregar al carrito" y pushea                                                                                          
+        carritoDeCompras.push(producto);                                             //al array del carro de compras producto con el id igual al id del boton
         console.log(carritoDeCompras);
     })
 };
