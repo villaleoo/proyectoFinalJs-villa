@@ -2,37 +2,51 @@ body {
   margin: 0;
   padding: 0; }
 
-.header .primero .enviosPais {
-  display: flex;
-  justify-content: center; }
-  .header .primero .enviosPais .envios {
-    font-size: x-large;
-    font-weight: bolder; }
+.header .primero {
+  margin: 0;
+  padding: 0; }
+  .header .primero .enviosPais {
+    display: flex;
+    justify-content: center; }
+    .header .primero .enviosPais .envios {
+      font-size: x-large;
+      font-weight: bolder; }
 
 .header .searchPadre {
   display: flex;
   justify-content: space-around;
   background-color: green;
-  height: 100px; }
-  .header .searchPadre .logo {
+  height: 100px;
+  margin: 0;
+  padding: 0; }
+
+.header .carritoLogin {
+  display: flex;
+  background-color: green;
+  margin: 0;
+  padding: 0; }
+  .header .carritoLogin .headerNav .contadorCarrito {
+    cursor: pointer; }
+  .header .carritoLogin .headerNav .contenedorCarrito .productoEnCarrito {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 100%;
-    width: 8%; }
-    .header .searchPadre .logo img {
-      width: 60%; }
-  .header .searchPadre .search {
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-    .header .searchPadre .search .barraSearch {
-      width: 500px; }
-  .header .searchPadre .usuario {
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-    .header .searchPadre .usuario .register {
-      padding: 0px 8px; }
+    align-items: center;
+    margin: 5px 0px;
+    padding: 3px 0px;
+    border-bottom: solid black; }
+    .header .carritoLogin .headerNav .contenedorCarrito .productoEnCarrito .nombreEnCarro {
+      font-style: italic;
+      font-weight: bolder; }
+  .header .carritoLogin .headerNav .contenedorCarrito .btnEliminar {
+    width: min-content;
+    height: min-content; }
+  .header .carritoLogin .headerNav .contenedorCarrito .totalCarrito {
+    background-color: aqua;
+    order: 5; }
+  .header .carritoLogin .headerNav .contenedorCarrito img {
+    width: 150px;
+    height: 150px; }
 
 .content .enviosCuotas {
   display: flex;

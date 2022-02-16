@@ -1,5 +1,7 @@
 .header{
     .primero{
+        margin:0;
+        padding: 0;
         .enviosPais{
             display: flex;
             justify-content: center;
@@ -14,29 +16,44 @@
         justify-content: space-around;
         background-color: green;
         height: 100px;
-        .logo{
-            display: flex;
-            justify-content: center;
-            height: 100%;
-            width: 8%;
-            img{
-                width: 60%;
+        margin:0;
+        padding: 0;
+    }
+    .carritoLogin{
+        display: flex;
+        background-color: green;
+        margin:0;
+        padding: 0;
+        .headerNav{
+            .contadorCarrito{
+                cursor: pointer;
             }
-        }
-        .search{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .barraSearch{
-                width: 500px;
-            }
-        }
-        .usuario{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .register{
-                padding: 0px 8px;
+            .contenedorCarrito{
+                .productoEnCarrito{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 5px 0px;
+                    padding: 3px 0px;
+                    border-bottom: solid black;
+                    .nombreEnCarro{
+                        font-style: italic;
+                        font-weight: bolder;
+                    }
+                }
+                .btnEliminar{
+                    width: min-content;
+                    height: min-content;
+                }
+                .totalCarrito{
+                    background-color: aqua;
+                    order: 5;
+                }
+                img{
+                    width: 150px;
+                    height: 150px;
+                }
             }
         }
     }
