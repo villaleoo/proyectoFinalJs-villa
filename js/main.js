@@ -154,15 +154,15 @@ function mostrarProductos(array){
         let divProductos = document.createElement ("div");
         divProductos.className ="contenedorProductos";               //esta funcion crea un div con un h4,h3,imagenes y un boton de agregar al carrito por cada producto y los muestra en el html
         divProductos.innerHTML += `<div class="img-productos">              
-                                        <img src="${producto.img}">
-                                    </div> 
-                                    <div class="info-productos">
-                                        <h4 class="nombreProductos">${producto.nombre}</h4>
-                                        <h3 class="precioProductos">$${producto.precio}</h3>
-                                    </div>
-                                    <div class="btnComprar">
-                                        <button type="button" id="${producto.id}" class="addCarrito btn btn-outline-success">Agregar al carrito</button>
-                                    </div>`;
+        <img src="${producto.img}">
+        </div> 
+        <div class="info-productos">
+        <h4 class="nombreProductos">${producto.nombre}</h4>
+        <h3 class="precioProductos">$${producto.precio}</h3>
+        </div>
+        <div class="btnComprar">
+        <button type="button" id="${producto.id}" class="addCarrito btn btn-outline-success">Agregar al carrito</button>
+        </div>`;
         containerProductos.appendChild(divProductos);       //esto inserta el div creado (con sus hijos) al contenedor de productos del html
         
         let btnAgregar =document.getElementById(`${producto.id}`) 
@@ -178,33 +178,33 @@ function mostrarProductos(array){
 function agregarAlCarrito(id){                                              //agrega al array del carrito el producto que coincide con el id del boton clikeado
     let repetido=carritoDeCompras.find(item=> item.id == id);        //busca en el array del carrito el id del "nuevo producto añadido" y verifica si ya habia en el carrito un producto con ese ID
     if(repetido){
-        repetido.cantidad = repetido.cantidad + 1;                  //si hay un producto con ese ID, a la "cantidad" que habia de ese producto, le suma 1 (un producto adicional)
+        repetido.cantidad += 1;                  //si hay un producto con ese ID, a la "cantidad" que habia de ese producto, le suma 1 (un producto adicional)
         document.getElementById(`unidades${repetido.id}`).innerHTML = `<p id=unidades${repetido.id} class="cantidadEnCarro">Cantidad: ${repetido.cantidad}</p>`; //le cambia la vista en el HTML , por ejemplo de "unidades:1" a "unidades:2"
         actualizarCarrito(); //llama a la funcion actualizar carrito para que se modifique el total de la compra y el contador del carrito
     }else{
         let productoAgregado = productos.find(articulo=>articulo.id== id); //busca en el array de productos el producto que coincida con el ID del boton clikeado para "añadir al carrito"
-        carritoDeCompras.push(productoAgregado);  //cuando encuentra el producto asociado al ID del boton, lo pushea (agrega) al array del carrito de compras
+        carritoDeCompras=[...carritoDeCompras,productoAgregado];  //cuando encuentra el producto asociado al ID del boton, lo pushea (agrega) al array del carrito de compras
         actualizarCarrito();
         mostrarCarrito(productoAgregado);//llama a la funcion mostrar carrito para que muestre el div con imagen,precio y nombre del producto agregado al array del carrito
     }
-     localStorage.setItem("carrito", JSON.stringify(carritoDeCompras)); //guarda los cambios efectuados en nuestro carrito en el localstorage para que en caso de refrescar la pagina quede almacenado alli
+    localStorage.setItem("carrito", JSON.stringify(carritoDeCompras)); //guarda los cambios efectuados en nuestro carrito en el localstorage para que en caso de refrescar la pagina quede almacenado alli
 };
 
 function mostrarCarrito(productoAgregado){  //"crea" los productos  dentro del carrito, similar a la funcion mostrarProductos pero esta dedicada a los productos del carrito
-
+    
     let {nombre, precio, id, cantidad, img}= productoAgregado;  //destructuracion de la variable productoAgregado para obtener los elementos nombre,id,precio,etc.
     
     let div = document.createElement("div");        
     div.className= "productoEnCarrito"                          //en estas lineas se crea c/u de los productos agregados al array del carrito con su boton de QUITAR
     div.innerHTML=`
-                    <p class="nombreEnCarro">${nombre}</p>
-                    <img src="${img}" class="imagenesEnCarrito"/>
-                    <p class="precioEnCarro">$${precio}</p>
-                    <p id=unidades${id} class="cantidadEnCarro">Unidades: ${cantidad}</p>
-                    <button class="btnEliminar" id=botonEliminar${id}>Quitar</button>
-                    `
+    <p class="nombreEnCarro">${nombre}</p>
+    <img src="${img}" class="imagenesEnCarrito"/>
+    <p class="precioEnCarro">$${precio}</p>
+    <p id=unidades${id} class="cantidadEnCarro">Unidades: ${cantidad}</p>
+    <button class="btnEliminar" id=botonEliminar${id}>Quitar</button>
+    `
     contenidoCarrito.appendChild(div);
-
+    
     let btnEliminar= document.getElementById(`botonEliminar${productoAgregado.id}`);
     btnEliminar.addEventListener("click", ()=>{                   //se crea el evento que al clikear en el boton "QUITAR" remueve el producto añadido al array del carrito
         if(productoAgregado.cantidad == 1){                        // condiciona que si hay solo 1 unidad del producto a QUITAR, remueva todo el div de ese producto
@@ -218,7 +218,6 @@ function mostrarCarrito(productoAgregado){  //"crea" los productos  dentro del c
             actualizarCarrito()
             localStorage.setItem("carrito", JSON.stringify(carritoDeCompras));
         }
-
     })
 }
 
@@ -231,11 +230,12 @@ function actualizarCarrito(){      //esta funcion actualiza el contador del carr
 
 function recuperar(){ //esta funcion permite guardar en storage los movimientos/eventos que se van realizando en el sitio
     let recuperarLS=JSON.parse(localStorage.getItem("carrito")); //esto crea el espacio llamado "carrito" en el storage
-    if(recuperarLS){  //esto condiciona al espacio creado en el storage
-        recuperarLS.forEach(element=>{  //esto guarda en el lugar "carrito" del storage cada producto añadido al array del carrito por la funcion agregarAlCarrito
-            agregarAlCarrito(element.id);
-        });
-    }
+    recuperarLS &&
+    recuperarLS.forEach(element=>{
+        mostrarCarrito(element)
+        carritoDeCompras.push(element)
+        actualizarCarrito()
+    })
 }
 recuperar(); 
 
@@ -253,11 +253,9 @@ function crearFiltros(array, contenedorEnHtml){
 
 
 
-
-
-for (const filter of allsFiltros){                  //recorre los inputs de filtros creados 
-    filter.addEventListener("click",()=>{  //evento que por hacer click en un filtro determinado, retorna el tipo o marca que coincida con el ID unico de cada input
-        mostrarProductos(productos.filter(p=>{      //el ID de los inputs toma el valor de cada uno de los tipos de producto y de cada una de las marcas
+for (const filter of allsFiltros){                  
+    filter.addEventListener("click",()=>{  
+        mostrarProductos(productos.filter(p=>{      
             if(filter.id.includes(p.tipo)){
                 return p.tipo == filter.id          
             }
@@ -267,3 +265,7 @@ for (const filter of allsFiltros){                  //recorre los inputs de filt
         }))
     })
 }
+
+
+
+//spread linea 186, AND, en funcion recuperar, destructuracion en linea 195
