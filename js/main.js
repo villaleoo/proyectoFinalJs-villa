@@ -268,4 +268,6 @@ for (const filter of allsFiltros){
 
 
 
-//spread linea 186 funcion agregar al carrito->else, AND en funcion recuperar, destructuracion en linea 195 funcion mostrar carrito (let producto agregado)
+//SPREAD linea 186 funcion agregar al carrito->else, 
+//AND en funcion recuperar,
+//DESTRUCTURACION en linea 195 funcion mostrar carrito (let producto agregado)
