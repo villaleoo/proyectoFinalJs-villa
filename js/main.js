@@ -168,7 +168,12 @@ function mostrarProductos(array){
         let btnAgregar =document.getElementById(`${producto.id}`) 
         
         btnAgregar.addEventListener("click",()=>{                   //este evento llama a la funcion "agregar al carrito", cuando se clikea en un boton creado 
-            agregarAlCarrito(producto.id)                           //anteriormente. Notese que se identifica por ID el boton clikeado. El ID diferencia c/u de los botones llamados "agregar al carrito"
+            agregarAlCarrito(producto.id)
+            Toastify({
+                text: "Tu producto fue añadido con éxito. 🛒",
+                duration: 2000,
+                gravity: "bottom"
+            }).showToast();                           //anteriormente. Notese que se identifica por ID el boton clikeado. El ID diferencia c/u de los botones llamados "agregar al carrito"
         })
     })
 };
@@ -218,6 +223,11 @@ function mostrarCarrito(productoAgregado){  //"crea" los productos  dentro del c
             actualizarCarrito()
             localStorage.setItem("carrito", JSON.stringify(carritoDeCompras));
         }
+        Toastify({
+            text: "Tu producto fue removido con éxito. ✔",
+            duration: 2000,
+            gravity: "bottom"
+        }).showToast();
     })
 }
 
