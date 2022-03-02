@@ -1,3 +1,4 @@
+/*
 function obtenerProducto(id, tipo, marca, nombre, genero, talles, precio,img,cantidad) {
     return {
         id,
@@ -116,7 +117,7 @@ const productos=[
     producto48 ,
     producto49 ,
     producto50 ,
-];
+];*/
 
 const productosValidos = ["gorra", "campera", "buzo", "remera","pantalon", "malla", "zapatilla"];
 const marcasValidas =["adidas", "nike", "vans", "puma"];
@@ -141,7 +142,14 @@ let arrayFiltrado=[]
 let filtrosArray=[]
 
 
-document.addEventListener("DOMContentLoaded", mostrarProductos(productos)); //carga los productos en el dom 
+fetch('../json/data.json')
+    .then (Response=> Response.json())
+    .then (data=> mostrarProductos(data))
+
+const stock= JSON.parse('../json/data.json')
+console.log(stock)
+
+//document.addEventListener("DOMContentLoaded", mostrarProductos(productos)); //carga los productos en el dom 
 
 crearFiltros(productosValidos, tipoDeProductoFilter); //llama a la funcion crear filtros  y los crea en el DOM
 crearFiltros(marcasValidas, marcaFilter);
@@ -187,7 +195,7 @@ function agregarAlCarrito(id){                                              //ag
         document.getElementById(`unidades${repetido.id}`).innerHTML = `<p id=unidades${repetido.id} class="cantidadEnCarro">Cantidad: ${repetido.cantidad}</p>`; //le cambia la vista en el HTML , por ejemplo de "unidades:1" a "unidades:2"
         actualizarCarrito(); //llama a la funcion actualizar carrito para que se modifique el total de la compra y el contador del carrito
     }else{
-        let productoAgregado = productos.find(articulo=>articulo.id== id); //busca en el array de productos el producto que coincida con el ID del boton clikeado para "añadir al carrito"
+        let productoAgregado = stock.find(articulo=>articulo.id== id); //busca en el array de productos el producto que coincida con el ID del boton clikeado para "añadir al carrito"
         carritoDeCompras=[...carritoDeCompras,productoAgregado];  //cuando encuentra el producto asociado al ID del boton, lo pushea (agrega) al array del carrito de compras
         actualizarCarrito();
         mostrarCarrito(productoAgregado);//llama a la funcion mostrar carrito para que muestre el div con imagen,precio y nombre del producto agregado al array del carrito
@@ -275,9 +283,3 @@ for (const filter of allsFiltros){
         }))
     })
 }
-
-
-
-//SPREAD linea 186 funcion agregar al carrito->else, 
-//AND en funcion recuperar,
-//DESTRUCTURACION en linea 195 funcion mostrar carrito (let producto agregado)
