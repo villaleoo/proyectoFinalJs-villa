@@ -1,39 +1,53 @@
-#productosPadre{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    height: 100%;
-    flex-wrap: wrap;
-    .contenedorProductos{
-        display: flex;
-        flex-direction: column;
-        margin: 20px 15px;
-        width: 25%;
-        height: 460px;
-        .img-productos{
-            display: flex;
-            margin:20px 0px 0px 0px;
-            width: 100%;
-            height: 65%;
-            img{
-                width:100%;
-                height: 100%;
+body{
+    overflow-x: hidden;
+    font-family: 'Josefin Sans', sans-serif, "Dancing Script";
+    margin-top: 120px;
+    .contenido{
+        .filtrosPadre{
+            font-size: large;
+            h5{
+                font-size: x-large;
+                font-weight: bolder;
             }
         }
-        .info-productos{
+        #productosPadre{
             display: flex;
-            justify-content: flex-start;
-            flex-direction: column;
-            align-items: flex-start;
-            margin:20px 0px 0px 0px;
-        }
-        .btnComprar{
-            margin:0;
-            display: flex;
-            justify-content: center;
+            justify-content: space-around;
             width: 100%;
-            #addCarrito{
-                width: 65%;
+            height: 100%;
+            flex-wrap: wrap;
+            .contenedorProductos{
+                display: flex;
+                flex-direction: column;
+                margin: 20px 15px;
+                width: 25%;
+                height: 460px;
+                .img-productos{
+                    display: flex;
+                    margin:20px 0px 0px 0px;
+                    width: 100%;
+                    height: 65%;
+                    img{
+                        width:100%;
+                        height: 100%;
+                    }
+                }
+                .info-productos{
+                    display: flex;
+                    justify-content: flex-start;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin:20px 0px 0px 0px;
+                }
+                .btnComprar{
+                    margin:0;
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    #addCarrito{
+                        width: 65%;
+                    }
+                }
             }
         }
     }

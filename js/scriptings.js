@@ -32,9 +32,8 @@ crearFiltros (generosValidos, generoFilter, "genero");
 async function obtenerProductos(){
     const respuesta= await fetch('./json/data.json');
     stock = await respuesta.json();
-    mostrarProductos(stock);  
+    mostrarProductos(stock);
 };
-
 
 function crearFiltros(array, contenedorEnHtml, tipoDeFiltro){
     
@@ -64,9 +63,6 @@ function crearFiltros(array, contenedorEnHtml, tipoDeFiltro){
     }
 };
 
-
-
-
 function mostrarProductos(array){
     containerProductos.innerHTML="";
     array.forEach(producto =>{                             //recorre cada producto para crear con cada uno de ellos lo siguiente
@@ -95,7 +91,7 @@ function mostrarProductos(array){
                     background: "green"
                 },
                 gravity: "bottom"
-            }).showToast();                           //anteriormente. Notese que se identifica por ID el boton clikeado. El ID diferencia c/u de los botones llamados "agregar al carrito"
+            }).showToast();            //anteriormente. Notese que se identifica por ID el boton clikeado. El ID diferencia c/u de los botones llamados "agregar al carrito"
         })
     })
 };
@@ -116,7 +112,7 @@ function agregarAlCarrito(id){                                              //ag
 };
 
 function mostrarCarrito(productoAgregado){  //"crea" los productos  dentro del carrito, similar a la funcion mostrarProductos pero esta dedicada a los productos del carrito
-    
+
     let {nombre, precio, id, cantidad, img}= productoAgregado;  //destructuracion de la variable productoAgregado para obtener los elementos nombre,id,precio,etc.
     
     let div = document.createElement("div");        
@@ -153,7 +149,49 @@ function mostrarCarrito(productoAgregado){  //"crea" los productos  dentro del c
         }).showToast();
     })
 };
+function actualizarCarrito(){      //esta funcion actualiza el contador del carrito y el total de la compra
+    if(carritoDeCompras.length>=1){
+        contenidoCarrito.style.display='flexbox'
+        totalCarrito.style.display= 'flexbox'
+        botonComprar.style.display='inline-block'
+    }else{
+        botonComprar.style.display='none'
+    }
+    contadorCarrito.innerText=carritoDeCompras.reduce((acc,el)=>acc + el.cantidad,0); //esto actualiza el contador del carrito
+    botonComprar.innerText=`Comprar💲`;
+    let total= carritoDeCompras.reduce ((acc,el)=> acc + (el.precio * el.cantidad),0);
+    totalCarrito.innerText=`Total compra: $${total}`;//esto actualiza el precio, iterando sobre el array del carrito y por cada elemento encontrado multiplicar su precio por la cantidad
+};
 
+botonComprar.addEventListener('click', ()=>{
+    let total= carritoDeCompras.reduce ((acc,el)=> acc + (el.precio * el.cantidad),0);
+    Swal.fire({
+        title: 'Esta seguro que desea realizar la compra?',
+        text: "Una vez aceptado se emitirá su factura n° 2347.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `Confirmar pago $${total}🔒`,
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+                'Compra realizada con éxito.',
+                `Se ha emitido su factura n° 2347.MUCHAS GRACIAS POR SU COMPRA 🙌.`,
+                'success'
+                )
+                carritoDeCompras=[]
+                localStorage.clear()
+                actualizarCarrito()
+                setTimeout(()=>{
+                    contenidoCarrito.innerHTML = ''
+                    actualizarCarrito(), 3000
+                })
+            }
+        })
+    
+})
 
 function recuperar(){ //esta funcion permite guardar en storage los movimientos/eventos que se van realizando en el sitio
     let recuperarLS=JSON.parse(localStorage.getItem("carrito")); //esto crea el espacio llamado "carrito" en el storage
@@ -165,48 +203,3 @@ function recuperar(){ //esta funcion permite guardar en storage los movimientos/
     })
 };
 recuperar(); 
-
-
-function actualizarCarrito(){      //esta funcion actualiza el contador del carrito y el total de la compra
-    if(carritoDeCompras.length>=1){
-        contenidoCarrito.style.display='flexbox'
-        totalCarrito.style.display= 'flexbox'
-        botonComprar.style.display='inline-block'
-    }else{ 
-        botonComprar.style.display='none'
-    }
-    contadorCarrito.innerText=carritoDeCompras.reduce((acc,el)=>acc + el.cantidad,0); //esto actualiza el contador del carrito
-    botonComprar.innerText=`Comprar`;
-    let total= carritoDeCompras.reduce ((acc,el)=> acc + (el.precio * el.cantidad),0);
-    totalCarrito.innerText=`Total compra: $${total}`;//esto actualiza el precio, iterando sobre el array del carrito y por cada elemento encontrado multiplicar su precio por la cantidad
-    
-};
-
-botonComprar.addEventListener('click', ()=>{
-    let total= carritoDeCompras.reduce ((acc,el)=> acc + (el.precio * el.cantidad),0);
-    Swal.fire({
-        icon: 'success',
-        title: 'Su compra se ha procesado con éxito.',
-        text: `Se emitirá una factura n° 27463 por el total de: 
-         $${total}. GRACIAS POR SU COMPRA 🙌.`,
-      })
-      carritoDeCompras=[]
-      localStorage.clear()
-      actualizarCarrito()
-      setTimeout(()=>{
-        contenidoCarrito.innerHTML = ''
-        actualizarCarrito(), 3000
-    })
-    
-})
-
-
-
-
-
-
-
-
-
-
-

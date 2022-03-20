@@ -6,19 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Josefin+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <title>Categorias</title>
 </head>
 <body>
   <div class="container-fluid">
     <div class="row header">
-      <div class="col-12 col-sm-12 col-lg-12 col-xl-12 primero">
-        <div class="enviosPais">
-          <h3 class="envios">Envios a todo el pais<h3>
-          </div>
-        </div>
+      <nav class="navbar fixed-top estilosNav">
         <div class="col-10 col-sm-10 col-lg-10 col-xl-10 searchPadre">
-          
+          <img src="./img/captura.PNG" alt="logo">
         </div>
         <div class="col-2 col-sm-2 col-lg-2 col-xl-2 carritoLogin">
           <header class="headerNav">
@@ -27,54 +25,17 @@
               <a id="contadorCarrito"></a><img src="./img/logos/comprar.png">
             </div>
             </div>
-          <div id="carritoContenedor" class="dropdown-menu contenedorCarrito" aria-labelledby="navbarCollapse">
-            <p class="totalCarrito"  id="totalCompra"></p>
-            <a class="btnComprar"  id="finalizar"></a>
+            <div id="carritoContenedor" class="dropdown-menu contenedorCarrito" aria-labelledby="navbarCollapse">
+              <div class="totalCarrito"  id="totalCompra"></div>
+              <a class="btnComprar" id="finalizar"></a>
+            </div>
           </div>
       </header>
     </div>
-    <div class="col-12 col-sm-12 col-lg-12 col-xl-12">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-                Categorias
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-                Hombre
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-                Mujer
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-                Marcas
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-                Zapatillas
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-                Liquidacion
-              </a>
-            </li>
-          </ul>
-        </div>
       </nav>
-    </div>
   </div>
   <div class="row contenido" id="contenidoCategorias">
-    <div class="col-12 col-sm-12 col-lg-12 col-xl-12" id="resultadosDeBusqueda"></div>
-    <div class="col-12 col-sm-12 col-lg-2 col-xl-2" id="contenedorFiltros">
+    <div class="col-5 col-sm-5 col-lg-2 col-xl-2 filtrosPadre" id="contenedorFiltros">
       <div class="filtros" id="filtroTipoProducto">
         <h5>Tipo de producto</h5>
       </div>
@@ -85,7 +46,7 @@
         <h5>Genero</h5>
       </div>
     </div>
-    <div class="col-12 col-sm-12 col-lg-10 col-xl-10" id="productosPadre"></div>
+    <div class="col-7 col-sm-7 col-lg-10 col-xl-10" id="productosPadre"></div>
   </div>
 </div>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
