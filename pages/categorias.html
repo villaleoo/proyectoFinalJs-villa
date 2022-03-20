@@ -22,27 +22,15 @@
         </div>
         <div class="col-2 col-sm-2 col-lg-2 col-xl-2 carritoLogin">
           <header class="headerNav">
-            <nav class="navbar navbar-expand-md navbar-dark ">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-              aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                  <div class="carroVista" class="nav-link dropdown-toggle img-fluid" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false">
-                  <div class="contadorCarrito">
-                    <a id="contadorCarrito"></a><img src="../img/logos/comprar.png">
-                  </div>
-                </div>
-                <div id="carritoContenedor" class="dropdown-menu contenedorCarrito" aria-labelledby="navbarCollapse">
-                  <p id="totalCompra" class="totalCarrito"></p>
-                </div>
-              </li>
-            </ul>
+            <div class="carroVista" class="nav-link dropdown-toggle img-fluid" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="contadorCarrito">
+              <a id="contadorCarrito"></a><img src="../img/logos/comprar.png">
+            </div>
+            </div>
+          <div id="carritoContenedor" class="dropdown-menu contenedorCarrito" aria-labelledby="navbarCollapse">
+            <p class="totalCarrito"  id="totalCompra"></p>
+            <a class="btnComprar"  id="finalizar"></a>
           </div>
-        </nav>
       </header>
     </div>
     <div class="col-12 col-sm-12 col-lg-12 col-xl-12">
@@ -94,13 +82,14 @@
         <h5>Marca</h5>
       </div>
       <div class="filtros" id="filtroGenero">
-        <h5></h5>
+        <h5>Genero</h5>
       </div>
     </div>
     <div class="col-12 col-sm-12 col-lg-10 col-xl-10" id="productosPadre"></div>
   </div>
 </div>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script src="../js/scriptings.js"></script>

@@ -9,6 +9,8 @@ let carritoDeCompras=[];
 let contenidoCarrito= document.getElementById("carritoContenedor");
 let contadorCarrito=document.getElementById("contadorCarrito");
 let totalCarrito=document.getElementById("totalCompra");
+let botonComprar=  document.getElementById("finalizar")
+
 
 
 let containerProductos= document.getElementById ("productosPadre");
@@ -21,8 +23,10 @@ let generoFilter= document.getElementById("filtroGenero");
 
 document.addEventListener("DOMContentLoaded", obtenerProductos())
 
-crearFiltros(productosValidos, tipoDeProductoFilter); //llama a la funcion crear filtros  y los crea en el DOM
-crearFiltros(marcasValidas, marcaFilter);
+
+crearFiltros(productosValidos, tipoDeProductoFilter,"tipo"); //llama a la funcmion crear filtros  y los crea en el DOM
+crearFiltros(marcasValidas, marcaFilter, "marca");
+crearFiltros (generosValidos, generoFilter, "genero");
 
 
 async function obtenerProductos(){
@@ -32,30 +36,36 @@ async function obtenerProductos(){
 };
 
 
-function crearFiltros(array, contenedorEnHtml){
+function crearFiltros(array, contenedorEnHtml, tipoDeFiltro){
+    
     array.forEach(p=>{
         let divFiltros= document.createElement ("div");
         divFiltros.className= "contenedorFiltros";         //recorre el array de marcasvalidas o productosvalidos(segun el filtro) y crea botones para filtrar(label e input)
         divFiltros.innerHTML +=`<label class="descripFiltro">${p}</label>                
-        <input type="radio" class="inputsFiltros" name="filters" id=${p} </input>`;
+        <input type="radio" name="filters" data-target=${tipoDeFiltro} class='botonFiltro' value=${p} </input>`; //con data-target diferencio cada input por categorias (tipo,marca,genero,talle,precio), mientras que con value le asigno a cada input un valor unico que puede tomar cada categoria (remera,buzo,adidas,nike)
         contenedorEnHtml.appendChild(divFiltros);
         
-        const botonesFiltro= document.querySelectorAll(".inputsFiltros");
-        
-        for (const filtro of botonesFiltro){
-            filtro.addEventListener("click", ()=>{  
-                mostrarProductos(stock.filter(p=>{      
-                    if(filtro.id.includes(p.tipo)){
-                        return p.tipo == filtro.id          
-                    }
-                    if(filtro.id.includes(p.marca)){
-                        return p.marca == filtro.id
-                    }
-                }))
-            })
-        }
     })
+    let botonesFiltro=document.getElementsByClassName ('botonFiltro');
+    
+    for (let i = 0;i < botonesFiltro.length; i++) {          //recorre la variable botonesFiltro que contiene todos los inputs generados 
+        botonesFiltro[i].addEventListener('click',(evento)=>{ //por cada input recorrido se le asigna el evento "click"
+            let productosFiltrados = stock.filter(item => {  //se crea una variable productosFiltrados donde almacene el stock de productos filtrados
+                let filtro = evento.target.dataset.target  //utilizando target llamamos a el valor data-target de cada input creado(y clickeado) y se guarda en el array filtro
+                if(filtro == 'genero'){        //si el valor que toma filtro es igual a 'genero'(o sea se clickeo en un input que tiene como dataset "genero") ......
+                    return item[filtro] === evento.target.value || item[filtro] == 'unisex'     //...... que me retorne el/los items (filtrados) que sean iguales al valor que toma "evento" ó los items de la variable filtro que sean iguales a "unisex"
+                } 
+                return item[filtro] === evento.target.value //si no coincide con "genero" que me retorne el/los items del array filtro que coincida con el valor que toma evento(valor que se obtiene al hacer click por el dataset)
+                
+            })
+            mostrarProductos(productosFiltrados) //se genera el array productosFiltrados en base a que lo que se clikea coincida con el tipo/marca/genero y se llama a la funcion mostrarProductos para que lo muestre
+        })
+        
+    }
 };
+
+
+
 
 function mostrarProductos(array){
     containerProductos.innerHTML="";
@@ -79,8 +89,11 @@ function mostrarProductos(array){
         btnAgregar.addEventListener("click",()=>{                   //este evento llama a la funcion "agregar al carrito", cuando se clikea en un boton creado 
             agregarAlCarrito(producto.id)
             Toastify({
-                text: "Tu producto fue añadido con éxito. 🛒",
-                duration: 2000,
+                text: `"${producto.nombre}" fue añadido con éxito. 🛒`,
+                duration: 2500,
+                style:{
+                    background: "green"
+                },
                 gravity: "bottom"
             }).showToast();                           //anteriormente. Notese que se identifica por ID el boton clikeado. El ID diferencia c/u de los botones llamados "agregar al carrito"
         })
@@ -131,17 +144,16 @@ function mostrarCarrito(productoAgregado){  //"crea" los productos  dentro del c
             localStorage.setItem("carrito", JSON.stringify(carritoDeCompras));
         }
         Toastify({
-            text: "Tu producto fue removido con éxito. ✔",
+            text: `${nombre} fue removido con éxito. ✔`,
             duration: 2000,
+            style:{
+                background: "#DE170B"
+            },
             gravity: "bottom"
         }).showToast();
     })
 };
 
-function actualizarCarrito(){      //esta funcion actualiza el contador del carrito y el total de la compra
-    contadorCarrito.innerText=carritoDeCompras.reduce((acc,el)=>acc + el.cantidad,0); //esto actualiza el contador del carrito
-    totalCarrito.innerText=`Total compra: $${carritoDeCompras.reduce ((acc,el)=> acc + (el.precio * el.cantidad),0)}`; //esto actualiza el precio, iterando sobre el array del carrito y por cada elemento encontrado multiplicar su precio por la cantidad
-};
 
 function recuperar(){ //esta funcion permite guardar en storage los movimientos/eventos que se van realizando en el sitio
     let recuperarLS=JSON.parse(localStorage.getItem("carrito")); //esto crea el espacio llamado "carrito" en el storage
@@ -153,6 +165,41 @@ function recuperar(){ //esta funcion permite guardar en storage los movimientos/
     })
 };
 recuperar(); 
+
+
+function actualizarCarrito(){      //esta funcion actualiza el contador del carrito y el total de la compra
+    if(carritoDeCompras.length>=1){
+        contenidoCarrito.style.display='flexbox'
+        totalCarrito.style.display= 'flexbox'
+        botonComprar.style.display='inline-block'
+    }else{ 
+        botonComprar.style.display='none'
+    }
+    contadorCarrito.innerText=carritoDeCompras.reduce((acc,el)=>acc + el.cantidad,0); //esto actualiza el contador del carrito
+    botonComprar.innerText=`Comprar`;
+    let total= carritoDeCompras.reduce ((acc,el)=> acc + (el.precio * el.cantidad),0);
+    totalCarrito.innerText=`Total compra: $${total}`;//esto actualiza el precio, iterando sobre el array del carrito y por cada elemento encontrado multiplicar su precio por la cantidad
+    
+};
+
+botonComprar.addEventListener('click', ()=>{
+    let total= carritoDeCompras.reduce ((acc,el)=> acc + (el.precio * el.cantidad),0);
+    Swal.fire({
+        icon: 'success',
+        title: 'Su compra se ha procesado con éxito.',
+        text: `Se emitirá una factura n° 27463 por el total de: 
+         $${total}. GRACIAS POR SU COMPRA 🙌.`,
+      })
+      carritoDeCompras=[]
+      localStorage.clear()
+      actualizarCarrito()
+      setTimeout(()=>{
+        contenidoCarrito.innerHTML = ''
+        actualizarCarrito(), 3000
+    })
+    
+})
+
 
 
 
