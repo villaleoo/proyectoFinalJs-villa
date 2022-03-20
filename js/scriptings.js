@@ -30,7 +30,7 @@ crearFiltros (generosValidos, generoFilter, "genero");
 
 
 async function obtenerProductos(){
-    const respuesta= await fetch('../json/data.json');
+    const respuesta= await fetch('./json/data.json');
     stock = await respuesta.json();
     mostrarProductos(stock);  
 };
