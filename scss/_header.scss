@@ -30,17 +30,20 @@
                     right:0;
                     left: auto;
                     background-color: lightyellow;
-                    .productoEnCarrito{
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        margin: 0px 0px;
-                        padding: 3px 0px;
-                        border-top: solid black;
-                        .nombreEnCarro{
-                            font-style: italic;
-                            font-weight: bolder;
+                    .contenedorDeProductos{
+                        margin:0px 0px 20px 0px;
+                        .productoEnCarrito{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            margin: 0px 0px;
+                            padding: 3px 0px;
+                            border-top: solid black;
+                            .nombreEnCarro{
+                                font-style: italic;
+                                font-weight: bolder;
+                            }
                         }
                     }
                     .btnEliminar{
@@ -50,15 +53,14 @@
                     }
                     .totalCarrito{
                         padding-left: 60px;
+                        margin:0px 0px 20px 0px;
                         font-size:medium;
                         font-weight: bolder;
                         background-color: rgb(253, 57, 57);
                     }
-                    .btnComprar{
-                        cursor: pointer;
-                        margin: 20px 100px;
-                        padding: 7px;
-                        background-color: rgb(253, 57, 57);
+                    .btnProcesar{
+                        margin: 20px 100px; 
+                        padding: 10px;
                         border-radius: 10px;
                         
                     }

@@ -26,31 +26,32 @@
         right: 0;
         left: auto;
         background-color: lightyellow; }
-        .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .productoEnCarrito {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          margin: 0px 0px;
-          padding: 3px 0px;
-          border-top: solid black; }
-          .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .productoEnCarrito .nombreEnCarro {
-            font-style: italic;
-            font-weight: bolder; }
+        .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .contenedorDeProductos {
+          margin: 0px 0px 20px 0px; }
+          .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .contenedorDeProductos .productoEnCarrito {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0px 0px;
+            padding: 3px 0px;
+            border-top: solid black; }
+            .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .contenedorDeProductos .productoEnCarrito .nombreEnCarro {
+              font-style: italic;
+              font-weight: bolder; }
         .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .btnEliminar {
           width: min-content;
           height: min-content;
           border-radius: 5px; }
         .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .totalCarrito {
           padding-left: 60px;
+          margin: 0px 0px 20px 0px;
           font-size: medium;
           font-weight: bolder;
           background-color: #fd3939; }
-        .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .btnComprar {
-          cursor: pointer;
+        .header .estilosNav .carritoLogin .headerNav .contenedorCarrito .btnProcesar {
           margin: 20px 100px;
-          padding: 7px;
-          background-color: #fd3939;
+          padding: 10px;
           border-radius: 10px; }
         .header .estilosNav .carritoLogin .headerNav .contenedorCarrito img {
           width: 150px;
@@ -92,8 +93,7 @@ body {
         align-items: flex-start;
         margin: 20px 0px 0px 0px; }
       body .contenido #productosPadre .contenedorProductos .btnComprar {
-        margin: 0;
-        display: flex;
+        margin: 20px 0px;
         justify-content: center;
         width: 100%; }
         body .contenido #productosPadre .contenedorProductos .btnComprar #addCarrito {
