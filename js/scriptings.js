@@ -160,8 +160,7 @@ function actualizarCarrito(){      //esta funcion actualiza el contador del carr
     contadorCarrito.innerText=carritoDeCompras.reduce((acc,el)=>acc + el.cantidad,0); //esto actualiza el contador del carrito
     if(carritoDeCompras.length>0){
         botonComprar.innerText=`Comprar💲`;
-        totalCarrito.innerText=`Total compra: $${total}`;//esto actualiza el precio, iterando sobre el array del carrito y por cada elemento encontrado multiplicar su precio por la cantidad
-        
+        totalCarrito.innerText=`Total compra: $${total}`;//esto actualiza el precio, iterando sobre el array del carrito y por cada elemento encontrado multiplicar su precio por la cantidad   
     }else{
         botonComprar.innerText='';
         totalCarrito.innerText='';
