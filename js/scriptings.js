@@ -6,10 +6,12 @@ const tallesValidosNumeros=[38,39,40,41,42,43];
 let stock=[]
 
 let carritoDeCompras=[];
-let contenidoCarrito= document.getElementById("carritoContenedor");
+let contenidoCarrito= document.getElementById("productosEnCarrito");
 let contadorCarrito=document.getElementById("contadorCarrito");
 let totalCarrito=document.getElementById("totalCompra");
 let botonComprar=  document.getElementById("finalizar")
+
+let ocultarCarrito= document.getElementById("carritoContenedor")
 
 
 
@@ -29,11 +31,14 @@ crearFiltros(marcasValidas, marcaFilter, "marca");
 crearFiltros (generosValidos, generoFilter, "genero");
 
 
+
 async function obtenerProductos(){
     const respuesta= await fetch('./json/data.json');
     stock = await respuesta.json();
     mostrarProductos(stock);
 };
+
+
 
 function crearFiltros(array, contenedorEnHtml, tipoDeFiltro){
     
@@ -149,18 +154,18 @@ function mostrarCarrito(productoAgregado){  //"crea" los productos  dentro del c
         }).showToast();
     })
 };
+
 function actualizarCarrito(){      //esta funcion actualiza el contador del carrito y el total de la compra
-    if(carritoDeCompras.length>=1){
-        contenidoCarrito.style.display='flexbox'
-        totalCarrito.style.display= 'flexbox'
-        botonComprar.style.display='inline-block'
-    }else{
-        botonComprar.style.display='none'
-    }
-    contadorCarrito.innerText=carritoDeCompras.reduce((acc,el)=>acc + el.cantidad,0); //esto actualiza el contador del carrito
-    botonComprar.innerText=`Comprar💲`;
     let total= carritoDeCompras.reduce ((acc,el)=> acc + (el.precio * el.cantidad),0);
-    totalCarrito.innerText=`Total compra: $${total}`;//esto actualiza el precio, iterando sobre el array del carrito y por cada elemento encontrado multiplicar su precio por la cantidad
+    contadorCarrito.innerText=carritoDeCompras.reduce((acc,el)=>acc + el.cantidad,0); //esto actualiza el contador del carrito
+    if(carritoDeCompras.length>0){
+        botonComprar.innerText=`Comprar💲`;
+        totalCarrito.innerText=`Total compra: $${total}`;//esto actualiza el precio, iterando sobre el array del carrito y por cada elemento encontrado multiplicar su precio por la cantidad
+        
+    }else{
+        botonComprar.innerText='';
+        totalCarrito.innerText='';
+    }
 };
 
 botonComprar.addEventListener('click', ()=>{
